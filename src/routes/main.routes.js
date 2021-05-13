@@ -3,39 +3,64 @@ const router = express.Router();
 const Projetos = require('../models/projetos')
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     //recuperar todos os registros
-    res.json({mensagem: 'todos os registros'});
+    try {
+        const projetos = await Projetos.find({})
+        res.json({error: false, projetos});
+    } catch (error) {
+        res.json({error: true, message: error.message});
+    }
+    
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:titulo', async (req, res) => {
     //recuperar com ID
-    const id = req.params.id;
-    res.json({mensagem: `pegar todos os ids ${id}`});
+    try {
+        const titulo = req.params.titulo
+        const projetos = await Projetos.find({Titulo: titulo})
+        res.json({error: false, projetos});
+    } catch (error) {
+        res.json({error: true, message: error.message});
+    }
 });
 
 router.post('/', async (req, res) => {
-    //rcia um usuario
+    //cria um usuario
     try {
         const body = req.body
         const response = await new Projetos(body).save();
         res.json({error: false, projetos: response});
-    } catch (err) {
-        res.json({error: true, message: err.message});
+    } catch (error) {
+        res.json({error: true, message: error.message});
     }
 
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
     //cria um usuario
-    const id = req.params.id;
-    res.json({mensagem: `pegar todos os ids ${id}`});
+    try {
+        const id = req.params.id
+        const novo_projeto = req.body;
+        console.log(novo_projeto)
+
+        const projeto = await Projetos.findByIdAndUpdate(id, novo_projeto)
+        res.json({error: false, projeto});
+    } catch (error) {
+        res.json({error: true, message: error.message});
+    }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
     //deletar um usuario
-    const id = req.params.id;
-    res.json({mensagem: `pegar todos os ids ${id}`});
+    try {
+        const id = req.params.id
+
+        const projeto = await Projetos.findOneAndDelete(id)        
+        res.json({error: false});
+    } catch (error) {
+        res.json({error: true, message: error.message});
+    }
 });
 
 module.exports = router
