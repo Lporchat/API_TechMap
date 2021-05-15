@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Fornecedores = require('../models/fornecedores')
+const Pavimentos = require('../models/pavimentos')
 
 
 router.get('/', async (req, res) => {
@@ -8,6 +9,18 @@ router.get('/', async (req, res) => {
     try {
         const fornecedores = await Fornecedores.find({})
         res.json({error: false,  fornecedores});
+    } catch (error) {
+        res.json({error: true, message: error.message});
+    }
+    
+});
+
+router.get('/:fornecedor', async (req, res) => {
+    //quem o fornecedor forneceu 
+    try {
+        const fornecedor = req.params.fornecedor
+        const pavimentos = await Pavimentos.find({Fornecedor: fornecedor})
+        res.json({error: false,  pavimentos});
     } catch (error) {
         res.json({error: true, message: error.message});
     }

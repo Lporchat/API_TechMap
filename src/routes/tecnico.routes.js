@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Tecnico = require('../models/tecnicos')
+const Pavimentos = require('../models/pavimentos')
 
 
 router.get('/', async (req, res) => {
@@ -8,6 +9,19 @@ router.get('/', async (req, res) => {
     try {
         const tecnicos = await Tecnico.find({})
         res.json({error: false,  tecnicos});
+    } catch (error) {
+        res.json({error: true, message: error.message});
+    }
+    
+});
+
+router.get('/:tecnico', async (req, res) => {
+    //projetos que ele ta
+    try {
+        const tecnico = req.params.tecnico
+        console.log(tecnico)
+        const pavimentos = await Pavimentos.find({Tecnico: tecnico})
+        res.json({error: false,  pavimentos});
     } catch (error) {
         res.json({error: true, message: error.message});
     }

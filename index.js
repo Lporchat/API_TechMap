@@ -12,6 +12,7 @@ const pavimentos = require('./src/routes/pavimentos.routes');
 mongoose.connect('mongodb://localhost:27017/TechMap', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
 });
 
 app.use(bodyParser.json());
@@ -23,6 +24,6 @@ app.use('/fornecedores', fornecedores);
 app.use('/pavimentos', pavimentos);
 
 
-app.listen(3000, () => {
+app.listen(5000, () => {
     console.log('servidor rodando');
 });
