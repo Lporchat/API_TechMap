@@ -9,7 +9,7 @@ const Projetos = mongoose.model('projetos',
     },
     Img: String,
     NumPavimentos: {
-        type: String,
+        type: Number,
         required:true,
     },
     Obs: String,

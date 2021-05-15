@@ -29,6 +29,7 @@ router.post('/', async (req, res) => {
     //cria um usuario
     try {
         const body = req.body
+        console.log(body)
         const response = await new Projetos(body).save();
         res.json({error: false, projetos: response});
     } catch (error) {
@@ -38,7 +39,7 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-    //cria um usuario
+    //Atualizar um usuario
     try {
         const id = req.params.id
         const novo_projeto = req.body;
