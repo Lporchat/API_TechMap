@@ -24,6 +24,6 @@ app.use('/fornecedores', fornecedores);
 app.use('/pavimentos', pavimentos);
 
 
-app.listen(5000, () => {
+app.listen(3000, () => {
     console.log('servidor rodando');
 });
