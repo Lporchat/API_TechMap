@@ -9,7 +9,7 @@ const tecnicos = require('./src/routes/tecnico.routes');
 const fornecedores = require('./src/routes/fornecedores.routes');
 const pavimentos = require('./src/routes/pavimentos.routes');
 
-mongoose.connect('mongodb+srv://andre:0610@techmap.xenvh.mongodb.net/TechMap', {
+mongoose.connect('mongodb+srv://xenvh.mongodb.net/TechMap', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
